@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <Header />
-    <Main :albumsArray="albumsArray" :genreArray="genreArray" />
+    <Main
+      :albumsArray="albumsArray"
+      :genreArray="genreArray"
+      :filteredAlbums="filteredAlbums"
+    />
   </div>
 </template>
 
@@ -9,7 +13,6 @@
 import axios from "axios";
 import Header from "./components/Header.vue";
 import Main from "./components/Main.vue";
-
 export default {
   name: "App",
   components: {
@@ -20,6 +23,7 @@ export default {
     return {
       albumsArray: [],
       genreArray: [],
+      filteredAlbums: [],
     };
   },
   created() {
@@ -27,26 +31,24 @@ export default {
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((response) => {
         this.albumsArray = response.data.response;
-        this.albumsArray.forEach((element) => {
-          if (!this.genreArray.includes(element.genre)) {
-            this.genreArray.push(element.genre);
-          }
-        });
+        this.filteredAlbums = response.data.response;
+        this.getGenresList();
       });
   },
-  //   computed: {
-  //     genreArray() {
-  //       return this.albumsArray.forEach((element) => {
-  //         if (!this.genreArray.includes(element.genre)) {
-  //           this.genreArray.push(element.genre);
-  //         }
-  //       });
-  //     },
-  //   },
+  methods: {
+    getGenresList() {
+      this.albumsArray.forEach((element) => {
+        if (!this.genreArray.includes(element.genre)) {
+          this.genreArray.push(element.genre);
+        }
+      });
+    },
+  },
 };
 </script>
 
 <style lang="sass">
 @import "./style/App.scss"
 </style>
+
 

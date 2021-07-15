@@ -2,7 +2,12 @@
   <div class="genreFilter">
     <label>
       GENERE:
-      <select class="genre-selector">
+      <select
+        class="genre-selector"
+        v-model="chosenGenre"
+        @change="$emit('filter', chosenGenre)"
+      >
+        <option value="">All</option>
         <option
           v-for="(genre, index) in genreArray"
           :key="index"
@@ -20,6 +25,11 @@ export default {
   name: "genreFilter",
   props: {
     genreArray: Array,
+  },
+  data() {
+    return {
+      chosenGenre: "",
+    };
   },
 };
 </script>
