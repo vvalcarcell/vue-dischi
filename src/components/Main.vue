@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="container">
-      <div v-if="albumsArray.length < 10" class="loading flex">
+      <div v-if="albumsArray.length == 0" class="loading flex">
         Caricamento in corso…
       </div>
       <div v-else class="flex">

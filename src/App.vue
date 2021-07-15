@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :genreArray="genreArray" />
     <Main :albumsArray="albumsArray" />
   </div>
 </template>
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       albumsArray: [],
+      genreArray: [],
     };
   },
   created() {
@@ -26,6 +27,11 @@ export default {
       .get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((response) => {
         this.albumsArray = response.data.response;
+        this.albumsArray.forEach((element) => {
+          if (!this.genreArray.includes(element.genre)) {
+            this.genreArray.push(element.genre);
+          }
+        });
       });
   },
 };
