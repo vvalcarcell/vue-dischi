@@ -1,5 +1,9 @@
 <template>
   <div class="container-fluid">
+    <div class="search">
+      <genreFilter :genreArray="genreArray" />
+    </div>
+
     <div class="container">
       <div v-if="albumsArray.length == 0" class="loading flex">
         Caricamento in corso…
@@ -20,13 +24,16 @@
 
 <script>
 import Album from "./Album.vue";
+import genreFilter from "./genreFilter.vue";
 export default {
   name: "Main",
   components: {
     Album,
+    genreFilter,
   },
   props: {
     albumsArray: Array,
+    genreArray: Array,
   },
 };
 </script>

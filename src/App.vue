@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header :genreArray="genreArray" />
-    <Main :albumsArray="albumsArray" />
+    <Header />
+    <Main :albumsArray="albumsArray" :genreArray="genreArray" />
   </div>
 </template>
 
@@ -34,6 +34,15 @@ export default {
         });
       });
   },
+  //   computed: {
+  //     genreArray() {
+  //       return this.albumsArray.forEach((element) => {
+  //         if (!this.genreArray.includes(element.genre)) {
+  //           this.genreArray.push(element.genre);
+  //         }
+  //       });
+  //     },
+  //   },
 };
 </script>
 
