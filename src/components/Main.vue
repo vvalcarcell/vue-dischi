@@ -31,20 +31,30 @@ export default {
     Album,
     genreFilter,
   },
+  data() {
+    return {
+      filter: "",
+    };
+  },
   props: {
     albumsArray: Array,
     genreArray: Array,
     filteredAlbums: Array,
   },
-  methods: {
-    filterAlbums(filter) {
-      if (filter == "All") {
-        this.filteredAlbums = this.albumsArray;
+  computed: {
+    filteredAlbums() {
+      if (this.filter == "All") {
+        return this.albumsArray;
       } else {
-        this.filteredAlbums = this.albumsArray.filter((album) => {
-          return album.genre.includes(filter);
+        return this.albumsArray.filter((album) => {
+          return album.genre.includes(this.filter);
         });
       }
+    },
+  },
+  methods: {
+    filterAlbums(filter) {
+      this.filter = filter;
     },
   },
 };
